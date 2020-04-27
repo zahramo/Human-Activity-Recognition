@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ActivityRecognition</string>
+    <string name="textview">TextView</string>
+    <string name="play_video">Play Video</string>
+    <string name="choose_video">Choose Video</string>
+    <string name="capture_video">Capture Video</string>
+</resources>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/har"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:layout_width="202dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="533dp"
+        android:layout_marginEnd="29dp"
+        android:backgroundTint="#FAFAFA"
+        android:fontFamily="@font/architects_daughter"
+        android:onClick="captureVideo"
+        android:text="@string/capture_video"
+        android:textSize="18sp" />
+
+    <Button
+        android:layout_width="202dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="463dp"
+        android:layout_marginEnd="29dp"
+        android:backgroundTint="#F8F8F8"
+        android:fontFamily="@font/architects_daughter"
+        android:onClick="chooseVideo"
+        android:text="@string/choose_video"
+        android:textSize="18sp" />
+
+    <Button
+        android:layout_width="202dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="600dp"
+        android:layout_marginEnd="29dp"
+        android:backgroundTint="#F8F8F8"
+        android:fontFamily="@font/architects_daughter"
+        android:onClick="playVideo"
+        android:text="@string/play_video"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="183dp"
+        android:layout_height="182dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="198dp"
+        android:layout_marginBottom="520dp"
+        android:alpha="0.8"
+        android:fontFamily="@font/architects_daughter"
+        android:text="Human Activity Recognition"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+</RelativeLayout>
