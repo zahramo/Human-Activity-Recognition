@@ -41,7 +41,7 @@ from gluoncv.utils.filesystem import try_import_decord
 decord = try_import_decord()
 
 # url = 'https://github.com/bryanyzhu/tiny-ucf101/raw/master/abseiling_k400.mp4'
-video_fname = './4665585311070531246.mp4'
+video_fname = './abseiling_k400.mp4'
 # utils.download(url)
 
 vr = decord.VideoReader(video_fname)

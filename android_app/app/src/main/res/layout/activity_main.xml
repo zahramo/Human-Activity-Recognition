@@ -36,19 +36,19 @@
         android:text="@string/choose_video"
         android:textSize="18sp" />
 
-    <Button
-        android:layout_width="202dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="200dp"
-        android:backgroundTint="#F8F8F8"
-        android:fontFamily="@font/architects_daughter"
-        android:onClick="playVideo"
-        android:text="@string/play_video"
-        android:textSize="18sp" />
+<!--    <Button-->
+<!--        android:layout_width="202dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:layout_marginEnd="30dp"-->
+<!--        android:layout_marginBottom="200dp"-->
+<!--        android:backgroundTint="#F8F8F8"-->
+<!--        android:fontFamily="@font/architects_daughter"-->
+<!--        android:onClick="playVideo"-->
+<!--        android:text="@string/play_video"-->
+<!--        android:textSize="18sp" />-->
 
     <TextView
         android:id="@+id/textView"

@@ -2,7 +2,6 @@ package com.example.activityrecognition;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(fileIntent,REQUEST_GET_CONTENT);
     }
 
-    public void playVideo(View view) {
+    public void playVideo() {
         Intent playIntent = new Intent(this,VideoPlayActivity.class);
         playIntent.putExtra("videoUri", videoUri.toString());
         startActivity(playIntent);
@@ -43,9 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if ((requestCode == REQUEST_VIDEO_CAPTURE || requestCode == REQUEST_GET_CONTENT) &&
                 resultCode == RESULT_OK) {
             videoUri = data.getData();
+            System.out.println("hii");
+            Intent playIntent = new Intent(this, VideoPlayActivity.class);
+            playIntent.putExtra("videoUri", videoUri.toString());
+            playVideo();
         }
     }
 }
