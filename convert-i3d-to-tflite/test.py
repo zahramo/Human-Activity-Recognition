@@ -4,11 +4,14 @@ from gluoncv.data.transforms import video
 from gluoncv import utils
 from gluoncv.utils.filesystem import try_import_decord
 from mxnet import gluon, nd, image
+import tflite_runtime.interpreter as tflite
+
 decord = try_import_decord()
 
 # Load TFLite model and allocate tensors.
-interpreter = tf.lite.Interpreter(model_path="converted_model.tflite")
-interpreter.allocate_tensors()
+print("here")
+interpreter = tflite.Interpreter(model_path="converted_model.tflite")
+# interpreter.allocate_tensors()
 
 # Get input and output tensors.
 input_details = interpreter.get_input_details()
@@ -35,12 +38,13 @@ input_data = nd.array(clip_input)
 # print(input_data)
 # print(input_data)
 print("before set tensor")
-interpreter.set_tensor(input_details[0]['index'], input_data)
+print(input_data)
+# interpreter.set_tensor(input_details[0]['index'], input_data)
 
 print("before invoke")
-interpreter.invoke()
+# interpreter.invoke()
 print("after invoke")
-output_data = interpreter.get_tensor(output_details[0]['index'])
+# output_data = interpreter.get_tensor(output_details[0]['index'])
 print(output_data)
 
 # # The function `get_tensor()` returns a copy of the tensor data.

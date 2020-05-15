@@ -33,6 +33,7 @@ from mxnet.gluon.data.vision import transforms
 from gluoncv.data.transforms import video
 from gluoncv import utils
 from gluoncv.model_zoo import get_model
+import tensorflow as tf
 
 ################################################################
 # Then, we download the video and extract a 32-frame clip from it.
@@ -76,6 +77,8 @@ print('%s model is successfully loaded.' % model_name)
 # in the transform function. Finally, we prepare the video clip and feed it to the model.
 
 pred = net(nd.array(clip_input))
+
+
 
 classes = net.classes
 topK = 5
