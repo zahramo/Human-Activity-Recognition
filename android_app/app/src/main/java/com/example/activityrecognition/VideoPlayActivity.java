@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.VideoView;
 
+import org.tensorflow.lite.Interpreter;
+
 public class VideoPlayActivity extends AppCompatActivity {
 
     private VideoView videoView;
