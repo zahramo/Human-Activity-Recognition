@@ -42,7 +42,7 @@ public class RecognizeActionActivity extends AppCompatActivity {
     // holds the probabilities of each label for non-quantized graphs
     private float[][] labelProbArray = null;
     // array that holds the labels with the highest probabilities
-    private String[] topLables = null;
+    private String[] topLabels = null;
     // array that holds the highest probabilities
     private String[] topConfidence = null;
 
@@ -85,55 +85,78 @@ public class RecognizeActionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_recognize_action);
 
         try {
             tflite = new Interpreter(loadModel(), tfliteOptions);
+            System.out.println("tfliteOptions: ");
+            System.out.println(tfliteOptions);
             labelList = loadLabelList();
-            System.out.println("after load model");
         } catch (IOException e) {
             e.printStackTrace();
         }
         videoData =
-                ByteBuffer.allocateDirect(
-                        BATCH_SIZE * NUM_OF_FRAMES * NUM_OF_FILTERS * WIDTH * HEIGHT);
+                ByteBuffer.allocateDirect(602112);
+
+//                        BATCH_SIZE * NUM_OF_FRAMES * NUM_OF_FILTERS * WIDTH * HEIGHT
+
 
         videoData.order(ByteOrder.nativeOrder());
-
-        setContentView(R.layout.activity_recognize_action);
-
-        // labels that hold top five results of CNN
-        label1 = (TextView) findViewById(R.id.label1);
-        label2 = (TextView) findViewById(R.id.label2);
-        label3 = (TextView) findViewById(R.id.label3);
-        label4 = (TextView) findViewById(R.id.label4);
-        label5 = (TextView) findViewById(R.id.label5);
-        // displays the probabilities of top labels
-        Confidence1 = (TextView) findViewById(R.id.Confidence1);
-        Confidence2 = (TextView) findViewById(R.id.Confidence2);
-        Confidence3 = (TextView) findViewById(R.id.Confidence3);
-        Confidence4 = (TextView) findViewById(R.id.Confidence4);
-        Confidence5 = (TextView) findViewById(R.id.Confidence5);
-
-        // initialize imageView that displays selected image to the user
-        // selected_image = (ImageView) findViewById(R.id.selected_image);
-
-        // initialize array to hold top labels
-        topLables = new String[RESULTS_TO_SHOW];
-        // initialize array to hold top probabilities
-        topConfidence = new String[RESULTS_TO_SHOW];
-
+//
+//
+//
+//        // labels that hold top five results of CNN
+//        label1 = (TextView) findViewById(R.id.label1);
+//        label2 = (TextView) findViewById(R.id.label2);
+//        label3 = (TextView) findViewById(R.id.label3);
+//        label4 = (TextView) findViewById(R.id.label4);
+//        label5 = (TextView) findViewById(R.id.label5);
+//        // displays the probabilities of top labels
+//        Confidence1 = (TextView) findViewById(R.id.Confidence1);
+//        Confidence2 = (TextView) findViewById(R.id.Confidence2);
+//        Confidence3 = (TextView) findViewById(R.id.Confidence3);
+//        Confidence4 = (TextView) findViewById(R.id.Confidence4);
+//        Confidence5 = (TextView) findViewById(R.id.Confidence5);
+//
+//        // initialize imageView that displays selected image to the user
+//        // selected_image = (ImageView) findViewById(R.id.selected_image);
+//
+//        // initialize array to hold top labels
+//        topLabels = new String[RESULTS_TO_SHOW];
+//        // initialize array to hold top probabilities
+//        topConfidence = new String[RESULTS_TO_SHOW];
+//
         classify();
     }
 
     public void classify(){
+        float[][][][][] inp = new float[1][1][224][224][3];
+        int [] out = new int[1000];
+        for(int i1=0; i1<1; i1++){
+            for(int i2=0; i2<1; i2++){
+                for(int i3=0; i3<1; i3++){
+                    for(int i4=0; i4<1; i4++){
+                        for(int i5=0; i5<1; i5++){
+                            inp[i1][i2][i3][i4][i5] = 0;
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
 //        System.out.println("in classify");
 //        float[] inputVal = new float[1];
 //        inputVal[0] = 1;
 //        float[][] outputval = new float[1][1];
-//        tflite.run(inputVal,outputval);
-//        System.out.println("end of classify");
-        tflite.run(videoData, labelProbArray);
-        printTopKLabels();
+//        tflite.run(videoData,out);
+        float a = 0;
+        tflite.run(inp, a);
+        System.out.println("end of classify");
+//        printTopKLabels();
 
     }
 
@@ -143,6 +166,8 @@ public class RecognizeActionActivity extends AppCompatActivity {
         FileChannel fileChannel = inputStream.getChannel();
         long startOffset = fileDescriptor.getStartOffset();
         long declaredLength = fileDescriptor.getDeclaredLength();
+        System.out.println("fileChannel:");
+        System.out.println(startOffset);
         return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
     }
 
@@ -175,16 +200,16 @@ public class RecognizeActionActivity extends AppCompatActivity {
         final int size = sortedLabels.size();
         for (int i = 0; i < size; ++i) {
             Map.Entry<String, Float> label = sortedLabels.poll();
-            topLables[i] = label.getKey();
+            topLabels[i] = label.getKey();
             topConfidence[i] = String.format("%.0f%%",label.getValue()*100);
         }
 
         // set the corresponding textviews with the results
-        label1.setText("1. "+topLables[4]);
-        label2.setText("2. "+topLables[3]);
-        label3.setText("3. "+topLables[2]);
-        label4.setText("4. "+topLables[1]);
-        label5.setText("5. "+topLables[0]);
+        label1.setText("1. "+topLabels[4]);
+        label2.setText("2. "+topLabels[3]);
+        label3.setText("3. "+topLabels[2]);
+        label4.setText("4. "+topLabels[1]);
+        label5.setText("5. "+topLabels[0]);
         Confidence1.setText(topConfidence[4]);
         Confidence2.setText(topConfidence[3]);
         Confidence3.setText(topConfidence[2]);

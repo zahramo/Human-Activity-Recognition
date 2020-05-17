@@ -46,10 +46,15 @@ video_fname = './abseiling_k400.mp4'
 # utils.download(url)
 
 vr = decord.VideoReader(video_fname)
+print("vr: ")
+print(vr)
 frame_id_list = range(0, 64, 2)
 video_data = vr.get_batch(frame_id_list).asnumpy()
+print("video_data: ")
+print(video_data.shape)
 clip_input = [video_data[vid, :, :, :] for vid, _ in enumerate(frame_id_list)]
-
+print("clip_input: ")
+print(clip_input.shape)
 ################################################################
 # Now we define transformations for the video clip.
 # This transformation function does three things:
@@ -63,39 +68,39 @@ clip_input = np.stack(clip_input, axis=0)
 clip_input = clip_input.reshape((-1,) + (32, 3, 224, 224))
 clip_input = np.transpose(clip_input, (0, 2, 1, 3, 4))
 print('Video data is downloaded and preprocessed.')
-
+print(clip_input.shape)
 ################################################################
 # Next, we load a pre-trained I3D model.
 
-model_name = 'i3d_inceptionv1_kinetics400'
-net = get_model(model_name, nclass=400, pretrained=True)
-print('%s model is successfully loaded.' % model_name)
+# model_name = 'i3d_inceptionv1_kinetics400'
+# net = get_model(model_name, nclass=400, pretrained=True)
+# print('%s model is successfully loaded.' % model_name)
 
-################################################################
-# Note that if you want to use InceptionV3 series model (i.e., i3d_inceptionv3_kinetics400),
-# please resize the image to have both dimensions larger than 299 (e.g., 340x450) and change input size from 224 to 299
-# in the transform function. Finally, we prepare the video clip and feed it to the model.
+# ################################################################
+# # Note that if you want to use InceptionV3 series model (i.e., i3d_inceptionv3_kinetics400),
+# # please resize the image to have both dimensions larger than 299 (e.g., 340x450) and change input size from 224 to 299
+# # in the transform function. Finally, we prepare the video clip and feed it to the model.
 
-pred = net(nd.array(clip_input))
+# pred = net(nd.array(clip_input))
 
 
 
-classes = net.classes
-topK = 5
-ind = nd.topk(pred, k=topK)[0].astype('int')
-print('The input video clip is classified to be')
-for i in range(topK):
-    print('\t[%s], with probability %.3f.'%
-          (classes[ind[i].asscalar()], nd.softmax(pred)[0][ind[i]].asscalar()))
+# classes = net.classes
+# topK = 5
+# ind = nd.topk(pred, k=topK)[0].astype('int')
+# print('The input video clip is classified to be')
+# for i in range(topK):
+#     print('\t[%s], with probability %.3f.'%
+#           (classes[ind[i].asscalar()], nd.softmax(pred)[0][ind[i]].asscalar()))
 
-################################################################
-#
-# We can see that our pre-trained model predicts this video clip
-# to be ``abseiling`` action with high confidence.
+# ################################################################
+# #
+# # We can see that our pre-trained model predicts this video clip
+# # to be ``abseiling`` action with high confidence.
 
-################################################################
-# Next Step
-# ---------
-#
-# If you would like to dive deeper into training I3D models on ``Kinetics400``,
-# feel free to read the next `tutorial on Kinetics400 <dive_deep_i3d_kinetics400.html>`__.
+# ################################################################
+# # Next Step
+# # ---------
+# #
+# # If you would like to dive deeper into training I3D models on ``Kinetics400``,
+# # feel free to read the next `tutorial on Kinetics400 <dive_deep_i3d_kinetics400.html>`__.
