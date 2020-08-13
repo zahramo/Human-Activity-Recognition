@@ -26,7 +26,6 @@ while(1):
 
     cv2.imshow('frame2',rgb)
     images.append(rgb)
-    # out.write(frame2)
     k = cv2.waitKey(30) & 0xff
     if k == 27:
         break
