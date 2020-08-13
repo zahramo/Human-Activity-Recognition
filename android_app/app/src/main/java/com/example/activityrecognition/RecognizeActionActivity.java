@@ -131,13 +131,13 @@ public class RecognizeActionActivity extends AppCompatActivity {
 
     public void classify(){
         float[][][][][] inp = new float[1][1][224][224][3];
-        int [] out = new int[1000];
+        float[][] out = new float[1][400];
         for(int i1=0; i1<1; i1++){
             for(int i2=0; i2<1; i2++){
-                for(int i3=0; i3<1; i3++){
-                    for(int i4=0; i4<1; i4++){
-                        for(int i5=0; i5<1; i5++){
-                            inp[i1][i2][i3][i4][i5] = 0;
+                for(int i3=0; i3<224; i3++){
+                    for(int i4=0; i4<224; i4++){
+                        for(int i5=0; i5<3; i5++){
+                            inp[i1][i2][i3][i4][i5] = (float) 0;
                         }
 
                     }
@@ -148,14 +148,23 @@ public class RecognizeActionActivity extends AppCompatActivity {
 
         }
 
+//        for(int i=0; i<400; i++){
+//            System.out.println("hi");
+//            System.out.println(out[0][i]);
+//        }
+
 //        System.out.println("in classify");
 //        float[] inputVal = new float[1];
 //        inputVal[0] = 1;
 //        float[][] outputval = new float[1][1];
 //        tflite.run(videoData,out);
-        float a = 0;
-        tflite.run(inp, a);
+//        float a = 0;
+        tflite.run(inp, out);
         System.out.println("end of classify");
+        for(int i=0; i<400; i++){
+            System.out.println("hi");
+            System.out.println(out[0][i]);
+        }
 //        printTopKLabels();
 
     }
